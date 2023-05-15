@@ -69,20 +69,3 @@ The Dockerfile starts with the base image `eclipse-temurin:17-jdk-jammy`, which 
 
 Feel free to modify the Dockerfile and adapt it to your specific requirements.
 
-## Contributing
-
-If you'd like to contribute to this project, please follow these guidelines:
-
-1. Fork the repository.
-
-2. Create a new branch for your feature or bug fix.
-
-3. Commit your changes and push the branch to your fork.
-
-4. Submit a pull request with a detailed description of your changes.
-
-We appreciate and welcome any contributions you make.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
