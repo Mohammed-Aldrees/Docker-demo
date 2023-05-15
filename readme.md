@@ -17,14 +17,14 @@ Follow the steps below to build and run the Docker image for the Spring Boot app
 1. Clone this repository to your local machine:
 
    ```shell
-   git clone https://github.com/your-username/spring-boot-docker.git
-   cd spring-boot-docker
+   git clone https://github.com/mohammad767/java-docker.git
+   cd java-docker
    ```
 
 2. Build the Docker image by executing the following command:
 
    ```shell
-   docker build -t spring-boot-app .
+   docker build -t java-docker .
    ```
 
    This command uses the Dockerfile in the repository to build an image with the tag `spring-boot-app`.
@@ -32,7 +32,7 @@ Follow the steps below to build and run the Docker image for the Spring Boot app
 3. Run the Docker container based on the image you just built:
 
    ```shell
-   docker run -p 8080:8080 spring-boot-app
+   docker run -p 8080:8080 java-docker
    ```
 
    The application will be accessible at `http://localhost:8080`.
