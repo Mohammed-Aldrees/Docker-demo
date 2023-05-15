@@ -1,73 +1,88 @@
-# Kubernetes Cluster Deployment with Docker Container
+Certainly! Here's a README file for a repository that utilizes the provided Dockerfile:
 
-This repository provides a guide and resources for deploying a Kubernetes cluster using Docker containers. It aims to simplify the process of setting up and managing a Kubernetes cluster, enabling you to focus on developing and deploying applications.
+# Spring Boot Application Dockerization
+
+This repository contains the necessary files to containerize and deploy a Java Spring Boot application using Docker.
 
 ## Prerequisites
 
-Before getting started, ensure that you have the following prerequisites installed:
+To build and run the Docker image, ensure that you have the following prerequisites installed on your local machine:
 
-- Docker: [Install Docker](https://docs.docker.com/engine/install/)
-- Kubernetes: [Install Kubernetes](https://kubernetes.io/docs/setup/)
-- kubectl: [Install kubectl](https://kubernetes.io/docs/tasks/tools/)
+- Docker: You can download and install Docker from the official website: [https://www.docker.com](https://www.docker.com)
 
-## Getting Started
+## Usage
 
-To deploy the Kubernetes cluster using the provided Docker container, follow these steps:
+Follow the steps below to build and run the Docker image for the Spring Boot application:
 
 1. Clone this repository to your local machine:
 
-```bash
-git clone https://github.com/mohammad767/java-docker.git
-cd java-docker
+   ```shell
+   git clone https://github.com/your-username/spring-boot-docker.git
+   cd spring-boot-docker
+   ```
+
+2. Build the Docker image by executing the following command:
+
+   ```shell
+   docker build -t spring-boot-app .
+   ```
+
+   This command uses the Dockerfile in the repository to build an image with the tag `spring-boot-app`.
+
+3. Run the Docker container based on the image you just built:
+
+   ```shell
+   docker run -p 8080:8080 spring-boot-app
+   ```
+
+   The application will be accessible at `http://localhost:8080`.
+
+## Dockerfile Details
+
+The Dockerfile in this repository has the following structure:
+
+```dockerfile
+FROM eclipse-temurin:17-jdk-jammy
+
+WORKDIR /app
+
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:resolve
+
+COPY src ./src
+
+CMD ["./mvnw", "spring-boot:run"]
 ```
 
-2. Build the Docker image using the provided Dockerfile:
+The Dockerfile starts with the base image `eclipse-temurin:17-jdk-jammy`, which provides the Java Development Kit (JDK) version 17.
 
-```bash
-docker build -t java-docker .
-```
+- The `WORKDIR /app` instruction sets the working directory within the Docker image to `/app`.
 
-3. Start the Kubernetes cluster:
+- The `COPY` instructions copy the Maven wrapper files (`mvnw` and `.mvn/`) and the `pom.xml` file into the image's `/app` directory.
 
-```bash
-minikube start
-```
+- The `RUN ./mvnw dependency:resolve` command resolves the project dependencies using Maven.
 
-4. Wait for the cluster to be provisioned. You can check the status using:
+- The `COPY src ./src` instruction copies the application source code from the local file system into the `/app/src` directory within the Docker image.
 
-```bash
-kubectl get nodes
-```
+- Finally, the `CMD` instruction specifies the command to run when the Docker container starts. It executes the Spring Boot application using the Maven wrapper.
 
-5. Deploy your application to the Kubernetes cluster(make sure that you are in the same deployment.yaml directory):
+Feel free to modify the Dockerfile and adapt it to your specific requirements.
 
-```bash
-kubectl apply -f deployment.yaml
-```
+## Contributing
 
-6. Verify that your application is running:
+If you'd like to contribute to this project, please follow these guidelines:
 
-```bash
-kubectl get pods
-```
+1. Fork the repository.
 
-You should see your application's pod in the list, indicating a successful deployment.
+2. Create a new branch for your feature or bug fix.
 
-## Customizing the Deployment
+3. Commit your changes and push the branch to your fork.
 
-You can customize the deployment by modifying the Kubernetes configuration files provided in the `/spring-petclinic-main/deployment.yaml`. Adjust the resources, environment variables, and other parameters according to your application's requirements.
+4. Submit a pull request with a detailed description of your changes.
 
-- `deployment.yaml`: Contains the deployment specification for your application.
+We appreciate and welcome any contributions you make.
 
-Feel free to explore and adapt these files to fit your specific needs.
+## License
 
-## Cleaning Up
-
-To clean up and tear down the Kubernetes cluster, use the following commands:
-
-```bash
-kubectl delete -f deployment.yaml
-kubectl delete -f kubernetes/cluster.yaml
-```
-
-This will remove the deployed application and the Kubernetes cluster from your environment.
+This project is licensed under the [MIT License](LICENSE).
