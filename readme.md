@@ -1,4 +1,3 @@
-Certainly! Here's a README file for a repository that utilizes the provided Dockerfile:
 
 # Spring Boot Application Dockerization
 
